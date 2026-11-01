@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>AI 後台</title>
+<style>
+  body { margin: 0; background: #f4f1ea; color: #1d1a16; font-family: "Microsoft JhengHei", "PingFang HK", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 20px 16px 40px; display: grid; gap: 12px; }
+  section { background: white; border: 1px solid #ddd4c6; border-radius: 8px; padding: 14px; }
+  h1 { margin: 0; font-size: 20px; }
+  h2 { margin: 0 0 8px; font-size: 16px; }
+  p, li { line-height: 1.5; }
+  .muted { color: #5e584f; }
+  pre { white-space: pre-wrap; font-family: inherit; margin: 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>AI 後台</h1>
+  <p class="muted">模擬頁同日後 WhatsApp 都走這一層。這裡先識別事件，再標缺漏、出稿、核對。缺漏不代填。未齊料沒有完整報告。</p>
+  <section>
+    <h2 id="status">未有案件</h2>
+    <p id="event"></p>
+    <p id="sent"></p>
+  </section>
+  <section>
+    <h2>缺漏</h2>
+    <ul id="gaps"></ul>
+  </section>
+  <section>
+    <h2>核對</h2>
+    <p>啱</p>
+    <ul id="right"></ul>
+    <p>錯</p>
+    <ul id="wrong"></ul>
+  </section>
+  <section>
+    <h2>對保安講的短句</h2>
+    <pre id="say"></pre>
+  </section>
+  <section>
+    <h2>原始口述</h2>
+    <pre id="transcript"></pre>
+  </section>
+</main>
+<script>
+const phone = localStorage.getItem("voice-sim-phone") || "sim";
+
+function fill(id, items) {
+  const list = document.getElementById(id);
+  list.replaceChildren();
+  for (const item of items || []) {
+    const li = document.createElement("li");
+    li.textContent = item;
+    list.appendChild(li);
+  }
+  if (!items || !items.length) {
+    const li = document.createElement("li");
+    li.textContent = "無";
+    list.appendChild(li);
+  }
+}
+
+async function refresh() {
+  const response = await fetch("/v1/voice/desk?phone=" + encodeURIComponent(phone));
+  const data = await response.json();
+  document.getElementById("status").textContent = data.status === "empty"
+    ? "未有案件"
+    : (data.complete ? "完整報告" : "未完成") + " · " + (data.status || "");
+  document.getElementById("event").textContent = data.event_label ? "事件類型：" + data.event_label : "";
+  document.getElementById("sent").textContent = data.sent ? "已送主管" : "未送主管";
+  fill("gaps", data.gaps);
+  fill("right", (data.check || {}).right);
+  fill("wrong", (data.check || {}).wrong);
+  document.getElementById("say").textContent = data.say || "";
+  document.getElementById("transcript").textContent = data.transcript || "";
+}
+
+refresh();
+setInterval(refresh, 2000);
+</script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+{"id": "cross_case_126", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_52", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_44", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_84", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓", "final_must_not_contain:A 座"]}
+{"id": "cross_case_76", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_60", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "lift_trapped_534", "type": "lift_trapped", "dimensions": ["asr_homophone", "date_followup_variants", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_98", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓"]}
+{"id": "cross_case_80", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_74", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_2", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "back_stairs_spill_583", "type": "back_stairs_spill", "dimensions": ["asr_homophone", "floor_short_merge", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_70", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "sewage_refuse_174", "type": "sewage_refuse", "dimensions": ["asr_homophone", "date_followup_variants", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "void_reset_87", "type": "void_reset", "dimensions": ["void_session_reset", "floor_short_merge"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_36", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "water_seepage_unit_770", "type": "water_seepage_unit", "dimensions": ["asr_homophone", "date_followup_variants", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_110", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_140", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓", "final_must_not_contain:A 座"]}
+{"id": "cross_case_92", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_24", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓"]}
+{"id": "cross_case_94", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓", "final_must_not_contain:A 座"]}
+{"id": "cross_case_18", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_16", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_14", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_142", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓"]}
+{"id": "back_stairs_spill_808", "type": "back_stairs_spill", "dimensions": ["asr_homophone", "floor_short_merge", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_56", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_90", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_22", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_138", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_8", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_100", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "sewage_refuse_778", "type": "sewage_refuse", "dimensions": ["asr_homophone", "date_followup_variants", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "void_reset_31", "type": "void_reset", "dimensions": ["void_session_reset", "floor_short_merge"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_10", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_108", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓"]}
+{"id": "lift_trapped_551", "type": "lift_trapped", "dimensions": ["asr_homophone", "date_followup_variants", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_86", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓", "final_must_not_contain:A 座"]}
+{"id": "cross_case_34", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓"]}
+{"id": "cross_case_106", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_4", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_0", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_50", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_112", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_148", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_116", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓", "final_must_not_contain:A 座"]}
+{"id": "water_seepage_unit_880", "type": "water_seepage_unit", "dimensions": ["asr_homophone", "date_followup_variants", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_82", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓"]}
+{"id": "cross_case_58", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_128", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_114", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_88", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_46", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓"]}
+{"id": "cross_case_42", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓"]}
+{"id": "cross_case_124", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_104", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "back_stairs_spill_389", "type": "back_stairs_spill", "dimensions": ["asr_homophone", "floor_short_merge", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_102", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_54", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_12", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓", "final_must_not_contain:A 座"]}
+{"id": "cross_case_134", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_20", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_48", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "water_seepage_unit_348", "type": "water_seepage_unit", "dimensions": ["asr_homophone", "date_followup_variants", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "water_seepage_unit_448", "type": "water_seepage_unit", "dimensions": ["asr_homophone", "date_followup_variants", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_120", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "water_seepage_unit_913", "type": "water_seepage_unit", "dimensions": ["asr_homophone", "date_followup_variants", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_62", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_30", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_144", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_146", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_122", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓"]}
+{"id": "cross_case_26", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "water_seepage_unit_362", "type": "water_seepage_unit", "dimensions": ["asr_homophone", "date_followup_variants", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_118", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_78", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_6", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_96", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_28", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_136", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "sewage_refuse_213", "type": "sewage_refuse", "dimensions": ["asr_homophone", "date_followup_variants", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_38", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "lift_trapped_701", "type": "lift_trapped", "dimensions": ["asr_homophone", "date_followup_variants", "floor_location_spot"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_40", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓", "final_must_not_contain:A 座"]}
+{"id": "cross_case_132", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_68", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:A 座", "location_missing_meta_floor"]}
+{"id": "cross_case_130", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_64", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓"]}
+{"id": "cross_case_32", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["location_missing_meta_floor"]}
+{"id": "cross_case_72", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓"]}
+{"id": "cross_case_66", "type": "cross_case", "dimensions": ["cross_case_isolation", "floor_location_spot", "date_followup_variants"], "errors": ["final_must_not_contain:8樓"]}

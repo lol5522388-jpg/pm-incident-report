@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>事件報告 · 模擬 WhatsApp</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: "Segoe UI", "Microsoft JhengHei", "PingFang HK", sans-serif;
+    background: #111b21;
+    color: #111;
+  }
+  .phone {
+    height: 100dvh;
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    background: #efeae2;
+  }
+  header {
+    background: #075e54;
+    color: #fff;
+    padding: 12px 14px 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #128c7e; display: grid; place-items: center; font-weight: 700;
+  }
+  header h1 { margin: 0; font-size: 16px; font-weight: 650; }
+  header p { margin: 2px 0 0; font-size: 12px; color: #d6f5ef; }
+  .log {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 10px 8px;
+    background:
+      linear-gradient(rgba(239,234,226,.92), rgba(239,234,226,.92)),
+      repeating-linear-gradient(45deg, #e6dfd4 0 12px, #efeae2 12px 24px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .bubble {
+    max-width: 86%;
+    padding: 8px 10px 6px;
+    border-radius: 8px;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    font-size: 15px;
+    box-shadow: 0 1px 0 rgba(0,0,0,.06);
+  }
+  .bot { align-self: flex-start; background: #fff; border-top-left-radius: 0; }
+  .me { align-self: flex-end; background: #d9fdd3; border-top-right-radius: 0; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .doc {
+    font: inherit; font-size: 14px;
+    background: #fff; color: #027eb5; border: 0;
+    border-radius: 16px; padding: 6px 10px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.12);
+    text-decoration: none;
+  }
+  .listen {
+    margin: 0;
+    padding: 6px 12px;
+    background: #f0f2f5;
+    color: #5c4a32;
+    font-size: 13px;
+  }
+  .listen.on { background: #fde8e8; color: #8d1d1d; }
+  form {
+    display: flex; gap: 8px; align-items: flex-end;
+    padding: 8px;
+    background: #f0f2f5;
+  }
+  textarea {
+    flex: 1; resize: none; border: 0; border-radius: 18px;
+    padding: 10px 12px; font: inherit; font-size: 15px; max-height: 120px;
+  }
+  #send {
+    width: 42px; height: 42px; border: 0; border-radius: 50%;
+    background: #075e54; color: white; font-size: 16px; cursor: pointer;
+  }
+  #mic {
+    height: 42px; border: 0; border-radius: 21px;
+    padding: 0 14px; background: #075e54; color: white;
+    font: inherit; font-size: 15px; cursor: pointer; white-space: nowrap;
+  }
+  #mic.on { background: #c62828; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <header>
+    <div class="avatar">報</div>
+    <div>
+      <h1>事件報告</h1>
+      <p>模擬 WhatsApp。講或者打字都得。整理結果以文字回你。</p>
+    </div>
+  </header>
+  <div class="log" id="log"></div>
+  <p id="listen" class="listen">撳咪高峰講，字會留喺框。小修改直接打字，再撳傳送。</p>
+  <form id="composer">
+    <button id="mic" type="button">🎤</button>
+    <textarea id="box" rows="1" placeholder="訊息"></textarea>
+    <button id="send" type="submit" aria-label="傳送">➤</button>
+  </form>
+</div>
+<script>
+const log = document.getElementById("log");
+const box = document.getElementById("box");
+const listen = document.getElementById("listen");
+const phoneKey = "voice-sim-phone";
+let phone = localStorage.getItem(phoneKey);
+if (!phone) {
+  phone = "852" + Math.floor(10000000 + Math.random() * 89999999);
+  localStorage.setItem(phoneKey, phone);
+}
+let recognition = null;
+
+function scrollDown() { log.scrollTop = log.scrollHeight; }
+
+function addBubble(side, text, documentCard) {
+  const node = document.createElement("div");
+  node.className = "bubble " + side;
+  node.textContent = text || "";
+  if (documentCard && documentCard.href) {
+    const link = document.createElement("a");
+    link.className = "doc";
+    link.href = documentCard.href;
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = documentCard.filename || "報告";
+    const row = document.createElement("div");
+    row.className = "chips";
+    row.appendChild(link);
+    node.appendChild(row);
+  }
+  log.appendChild(node);
+  scrollDown();
+}
+
+async function sendText(text) {
+  const clean = text.trim();
+  if (!clean) return;
+  if (recognition) recognition.stop();
+  addBubble("me", clean);
+  box.value = "";
+  const response = await fetch("/v1/voice/hear", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ phone, text: clean, source: "asr" }),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    addBubble("bot", data.detail || "傳送失敗");
+    return;
+  }
+  addBubble("bot", data.say || "", data.document);
+}
+
+document.getElementById("composer").addEventListener("submit", (event) => {
+  event.preventDefault();
+  sendText(box.value).catch((error) => addBubble("bot", error.message));
+});
+
+document.getElementById("mic").addEventListener("click", () => {
+  const mic = document.getElementById("mic");
+  const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (recognition) {
+    recognition.stop();
+    return;
+  }
+  if (!Speech) {
+    addBubble("bot", "呢部瀏覽器未有語音轉寫。請打字。");
+    return;
+  }
+  recognition = new Speech();
+  recognition.lang = "zh-HK";
+  recognition.interimResults = true;
+  recognition.continuous = true;
+  recognition.onresult = (event) => {
+    let text = "";
+    for (const result of event.results) text += result[0].transcript;
+    box.value = text;
+    listen.textContent = "講緊… 可以改字，再撳傳送。";
+    listen.classList.add("on");
+  };
+  recognition.onend = () => {
+    recognition = null;
+    mic.classList.remove("on");
+    mic.textContent = "🎤";
+    listen.classList.remove("on");
+    listen.textContent = box.value.trim()
+      ? "字已留喺框。改完再撳傳送。"
+      : "撳咪高峰講，字會留喺框。小修改直接打字，再撳傳送。";
+  };
+  recognition.onerror = (event) => {
+    if (event.error === "aborted" || event.error === "no-speech") return;
+    recognition = null;
+    mic.classList.remove("on");
+    mic.textContent = "🎤";
+    listen.classList.remove("on");
+    listen.textContent = "未開到咪。請允許咪高峰，或者直接打字。";
+  };
+  try {
+    recognition.start();
+  } catch (error) {
+    recognition = null;
+    return;
+  }
+  mic.classList.add("on");
+  mic.textContent = "停";
+  listen.textContent = "講緊… 講完撳停，改完再傳送。";
+  listen.classList.add("on");
+});
+
+addBubble("bot", "你可以講，或者打字。小修改直接打低送出。我唔會讀出聲，整理好先以文字回你。開新一單就打「新事件」。");
+</script>
+</body>
+</html>

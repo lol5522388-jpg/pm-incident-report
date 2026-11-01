@@ -1,0 +1,11 @@
+.env
+tools/
+__pycache__/
+.pytest_cache/
+.venv/
+.venv-asr/
+*.pyc
+data/*.db
+data/outbox/
+data/print_queue/
+data/pdf/

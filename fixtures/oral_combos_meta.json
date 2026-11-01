@@ -1,0 +1,27 @@
+{
+  "count": 1200,
+  "dimensions": [
+    "date_followup_variants",
+    "floor_location_spot",
+    "floor_short_merge",
+    "block_floor_spot",
+    "cross_case_isolation",
+    "void_session_reset",
+    "subjective_oral_rewrite",
+    "asr_homophone",
+    "time_no_12_00",
+    "unit_na_public"
+  ],
+  "types": [
+    "back_stairs_spill",
+    "car_park_scratch",
+    "cross_case",
+    "lift_trapped",
+    "noise_dispute",
+    "sewage_refuse",
+    "smoking_lobby",
+    "void_reset",
+    "water_seepage_unit"
+  ],
+  "seed": 20261022
+}

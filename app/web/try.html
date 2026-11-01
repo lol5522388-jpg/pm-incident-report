@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>試一次 · 保安口述報告</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #efe8dc;
+    color: #1d1a16;
+    font-family: "Microsoft JhengHei", "PingFang HK", sans-serif;
+  }
+  header { background: #24362c; color: #f3efe6; padding: 20px 16px 16px; }
+  header h1 { margin: 0 0 6px; font-size: 22px; font-weight: 650; }
+  header p { margin: 0; line-height: 1.5; color: #d5ddd6; max-width: 40rem; }
+  main { max-width: 720px; margin: 0 auto; padding: 16px 14px 48px; display: grid; gap: 12px; }
+  section { background: #fffdf8; border: 1px solid #ddd4c6; border-radius: 8px; padding: 14px; }
+  h2 { margin: 0 0 8px; font-size: 16px; }
+  label { display: block; font-size: 14px; margin: 8px 0 4px; }
+  input, textarea {
+    width: 100%; font: inherit; padding: 10px; border: 1px solid #c9bfb0; border-radius: 6px; background: #fff;
+  }
+  textarea { min-height: 120px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  button {
+    font: inherit; background: #24362c; color: #fff; border: 0; border-radius: 6px; padding: 10px 14px; cursor: pointer;
+  }
+  button.alt { background: #6e4b32; }
+  button.ghost { background: transparent; color: #24362c; border: 1px solid #24362c; }
+  button.on { background: #7a2e2e; }
+  button:disabled { opacity: 0.45; cursor: default; }
+  .log { display: grid; gap: 8px; }
+  .bubble { padding: 10px 12px; border-radius: 8px; line-height: 1.5; white-space: pre-wrap; }
+  .me { background: #e7f0e4; }
+  .bot { background: #f6f1e8; border: 1px solid #e4d9c8; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chips button, .chips a { font-size: 14px; }
+  a.doc { color: #24362c; }
+  .muted { color: #5e584f; font-size: 14px; line-height: 1.5; }
+  .warn { color: #7a2e2e; }
+  ol { margin: 8px 0 0; padding-left: 18px; }
+  li { margin: 4px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>試一次完整報告</h1>
+  <p>講或打一段保安口述。你可以先改字，再看 PDF，然後用電郵、WhatsApp 或列印佇列送出。草稿要人確認，不提供法律意見。</p>
+</header>
+<main>
+  <section>
+    <h2>怎樣試</h2>
+    <ol>
+      <li>填你已加進 Meta 測試名單的 WhatsApp 號碼。測試號碼 +1 555-203-0310 只會發訊息給這份名單。</li>
+      <li>按咪高峰講，或直接打字。講完的字會出現在框裡，改完再送出。</li>
+      <li>跟住回答缺少的項目。稿齊了就打開 PDF。</li>
+      <li>選電郵、發到 WhatsApp，或排入列印。</li>
+    </ol>
+  </section>
+  <section>
+    <label for="wa">你的 WhatsApp 號碼</label>
+    <input id="wa" inputmode="tel" autocomplete="tel" placeholder="例如 91234567 或 +852 9123 4567"/>
+    <label for="mail">主管電郵（只在按電郵時用）</label>
+    <input id="mail" type="email" autocomplete="email" placeholder="boss@example.com"/>
+  </section>
+  <section>
+    <h2>口述</h2>
+    <p class="muted" id="heard">未開始轉寫。</p>
+    <textarea id="src" placeholder="例如：今日09:05，A座2樓電梯大堂，2號電梯門無法打開，電梯內無人。我在大堂見到電梯門關閉。沒有人受傷。我已經通知主管。"></textarea>
+    <div class="row">
+      <button id="mic" type="button">用語音講</button>
+      <button id="send" type="button">送出這段</button>
+      <button id="fresh" class="ghost" type="button">新事件</button>
+    </div>
+    <p class="muted">這頁的語音用瀏覽器轉寫，方便你先看到字再改。伺服器上的 Qwen3-ASR 未開，所以不會把錄音亂估成文字。</p>
+  </section>
+  <section>
+    <h2>對話同稿</h2>
+    <div class="log" id="log"></div>
+    <div class="row" id="actions" hidden>
+      <a id="pdf" class="doc" href="#" target="_blank">打開 PDF</a>
+      <button id="do-mail" class="ghost" type="button">電郵主管</button>
+      <button id="do-wa" class="alt" type="button">發到 WhatsApp</button>
+      <button id="do-print" class="ghost" type="button">排入列印</button>
+    </div>
+    <p class="muted" id="job"></p>
+  </section>
+</main>
+<script>
+const wa = document.getElementById("wa");
+const src = document.getElementById("src");
+const log = document.getElementById("log");
+const heard = document.getElementById("heard");
+const actions = document.getElementById("actions");
+const pdf = document.getElementById("pdf");
+const job = document.getElementById("job");
+const saved = localStorage.getItem("try-whatsapp");
+if (saved) wa.value = saved;
+let caseId = "";
+let spoke = false;
+let recognition = null;
+
+function bubble(side, text) {
+  const node = document.createElement("div");
+  node.className = "bubble " + side;
+  node.textContent = text || "";
+  return node;
+}
+
+function show(data) {
+  const view = data.view || {};
+  if (view.case_id) caseId = view.case_id;
+  for (const item of data.bubbles || []) {
+    const node = bubble("bot", item.text);
+    if (item.buttons && item.buttons.length) {
+      const row = document.createElement("div");
+      row.className = "chips";
+      for (const button of item.buttons) {
+        const el = document.createElement("button");
+        el.type = "button";
+        el.textContent = button.title;
+        el.addEventListener("click", () => choose(button));
+        row.appendChild(el);
+      }
+      node.appendChild(row);
+    }
+    log.appendChild(node);
+  }
+  const ready = view.status === "ready" && data.document && data.document.href;
+  actions.hidden = !ready;
+  if (ready) {
+    pdf.href = data.document.href;
+    pdf.textContent = data.document.filename || "打開 PDF";
+  }
+}
+
+async function turn(body) {
+  const response = await fetch("/v1/wa/turn", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.detail || "傳送失敗");
+  show(data);
+}
+
+async function sendText() {
+  const text = src.value.trim();
+  if (!text) return;
+  localStorage.setItem("try-whatsapp", wa.value.trim());
+  log.appendChild(bubble("me", text));
+  const source = spoke ? "asr" : "text";
+  spoke = false;
+  src.value = "";
+  heard.textContent = "已送出。";
+  await turn({ phone: "try-desk", text, source, notify: false });
+}
+
+async function choose(button) {
+  log.appendChild(bubble("me", button.title));
+  await turn({ phone: "try-desk", choice_id: button.id, text: button.title, notify: false });
+}
+
+async function deliver(channel) {
+  if (!caseId) throw new Error("報告未完成。");
+  const to = channel === "whatsapp" ? wa.value.trim() : (channel === "email" ? document.getElementById("mail").value.trim() : "");
+  const response = await fetch("/v1/cases/" + caseId + "/deliver", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ channel, to: to || null }),
+  });
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.detail || "送出失敗");
+  const item = (data.channels || [])[0] || {};
+  if (item.status === "error") {
+    const reason = (item.text && item.text.reason) || item.reason || "送出失敗";
+    job.textContent = reason;
+    job.className = "warn";
+    return;
+  }
+  job.className = "muted";
+  if (channel === "whatsapp") job.textContent = "已交由 +1 555-203-0310 發往 " + (item.to || to) + "。請在該 WhatsApp 查看。";
+  else if (channel === "email") job.textContent = "電郵狀態：" + item.status + "，收件：" + (item.to || "");
+  else job.textContent = "已排入列印佇列。狀態：" + item.status + "。這部程式不直接控制印表機。";
+}
+
+document.getElementById("send").addEventListener("click", () => {
+  sendText().catch((error) => log.appendChild(bubble("bot", error.message)));
+});
+document.getElementById("fresh").addEventListener("click", () => {
+  src.value = "新事件";
+  sendText().catch((error) => log.appendChild(bubble("bot", error.message)));
+});
+document.getElementById("do-mail").addEventListener("click", () => deliver("email").catch((error) => { job.textContent = error.message; job.className = "warn"; }));
+document.getElementById("do-wa").addEventListener("click", () => deliver("whatsapp").catch((error) => { job.textContent = error.message; job.className = "warn"; }));
+document.getElementById("do-print").addEventListener("click", () => deliver("print").catch((error) => { job.textContent = error.message; job.className = "warn"; }));
+
+const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+document.getElementById("mic").addEventListener("click", () => {
+  const mic = document.getElementById("mic");
+  if (!Speech) {
+    heard.textContent = "這部瀏覽器沒有語音轉寫。請直接打字。";
+    return;
+  }
+  if (recognition) {
+    recognition.stop();
+    return;
+  }
+  recognition = new Speech();
+  recognition.lang = "zh-HK";
+  recognition.interimResults = true;
+  recognition.onresult = (event) => {
+    let text = "";
+    for (const result of event.results) text += result[0].transcript;
+    src.value = text;
+    heard.textContent = "轉寫中，可直接改字：" + text;
+    spoke = true;
+  };
+  recognition.onend = () => {
+    recognition = null;
+    mic.classList.remove("on");
+    mic.textContent = "用語音講";
+    if (src.value.trim()) heard.textContent = "轉寫完成。改完再按送出。";
+  };
+  recognition.onerror = () => {
+    heard.textContent = "語音轉寫未開始。請允許咪高峰，或直接打字。";
+    recognition = null;
+    mic.classList.remove("on");
+    mic.textContent = "用語音講";
+  };
+  mic.classList.add("on");
+  mic.textContent = "停止";
+  recognition.start();
+});
+</script>
+</body>
+</html>

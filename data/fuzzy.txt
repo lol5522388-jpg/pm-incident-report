@@ -1,0 +1,11 @@
+# 只對這些詞做近音建議。時間、地點、人名一律不自動改寫。
+place 海晴閣
+place 後樓梯
+place 消防樓梯
+place 電梯大堂
+place 接待處
+place 垃圾房
+place 管理處
+term 告示牌
+term 對講機
+term 救護車
